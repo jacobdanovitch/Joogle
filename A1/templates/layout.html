@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <script src="{{ url_for('static', filename='js/jquery-1.11.3.js')}}"></script>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}" />
+    <title>{% block title %}{% endblock %} - Joogle</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div class="footer">
+      <footer class="bottom-toolbar">
+        <nav class="footer-left">
+          <a href="#">Advertising</a>
+          <a href="#">Business</a>
+          <a href="#">About</a>
+        </nav>
+        <nav class="footer-right">
+          <a href="#">New Privacy &amp; Terms</a>
+          <a href="#">Settings</a>
+        </nav>
+      </footer>
+  </div>
+  </body>
+</html>

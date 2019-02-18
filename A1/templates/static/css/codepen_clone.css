@@ -1,0 +1,253 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: arial, sans-serif;
+  background-color: #fff;
+}
+
+.top-bar {
+  height: 75px;
+  position: relative;
+}
+
+.left-side {
+  float: left;
+  height: 60px;
+}
+
+#main-logo {
+  height: 30px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 10px;
+}
+
+#search-bar:focus {
+  outline: none;
+}
+
+#search-bar {
+  width: 650px;
+  height: 45px;
+  border: 1px solid rgba(223,225,229,0);
+  border-radius: 24px;
+  box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+  transform: translateY(-2%);
+  font-size: 11pt;
+  padding: 5px;
+}
+
+.right-side {
+  float: right;
+  margin-top: 1%;
+}
+
+.right-side ul {
+  margin-right: 30px;
+}
+
+.right-side ul li {
+  margin-left: 8px;
+  margin-right: 8px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#nine-square {
+  background-image: url("https://ssl.gstatic.com/gb/images/i1_1967ca6a.png");
+  background-position: -132px -38px;
+  background-size: 528px 68px;
+  opacity: 0.55;
+  height: 30px;
+  width: 30px;
+}
+
+#circle-bell {
+  background-image: url("https://ssl.gstatic.com/gb/images/i1_1967ca6a.png");
+  background-position: -194px -21px;
+  background-size: 528px 68px;
+  opacity: 0.55;
+  height: 20px;
+  width: 20px;
+  background-color: rgba(0,0,0,.85);
+  border-radius: 50%;
+}
+
+#profile-pic {
+  width: 32px;
+  height: 32px;
+  background-image: url("https://cdn-img-3.wanelo.com/p/770/842/3b5/50160de6ec9a55381fcf492/x354-q80.jpg");
+  background-size: 32px 32px;
+  border-radius: 50%;
+}
+
+.scnd-bar {
+  display: inline-block;
+  width: 100%;
+  margin-top: 10px;
+  height: 45px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.scnd-left {
+  float: left;
+  margin-left: 110px;
+}
+
+.scnd-right {
+  float: right;
+}
+
+.nav-list {
+  list-style: none;
+  font-size: 15px;
+}
+
+.nav-list li {
+  display: inline-block;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.nav-list li a{
+  text-decoration: none;
+  color: #777;
+  
+}
+
+#active {
+  color: #4285f4;
+  font-weeight: bold;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-bottom: 3px solid #4285f4;
+}
+
+.scnd-right {
+  font-size: 0;
+  margin-top: 8px;
+  margin-right: 20px;
+}
+
+.user {
+  width: 26px;
+  height: 27px;
+  padding: 0 8px;
+  border: 1px solid #c6c6c6;
+  background: #f5f5f5;
+  display: inline-block;
+}
+
+#user-span {
+  background: url("https://www.google.com/images/nav_logo242.png") no-repeat;
+  background-position: 0 -328px;
+  height: 14px;
+  width: 14px;
+  margin: 5px auto;
+}
+
+.globe {
+  display: inline-block;
+  width: 26px;
+  height: 27px;
+  padding: 0 8px;
+  border: 1px solid #c6c6c6;
+  background: #eee;
+  margin-right: 10px;
+}
+
+#globe-span {
+  background: url("https://www.google.com/images/nav_logo242.png") no-repeat;
+  background-position: -45px -328px;
+  height: 14px;
+  width: 14px;
+  margin: 6px auto;
+}
+
+.settings {
+  display: inline-block;
+  height: 27px;
+  width: 54px;
+  padding: 0 8px;
+  border: 1px solid #c6c6c6;
+  background: #f5f5f5;
+}
+
+#settings-span {
+  background: url("https://www.google.com/images/nav_logo242.png") no-repeat;
+  background-position: -42px -259px;
+  height: 17px;
+  width: 17px;
+  margin: 5px auto;
+  opacity: 0.667;
+}
+
+.results {
+  margin-left: 174px;
+  margin-top: 10px;
+}
+
+#num-results {
+  font-size: 14px;
+  color: #808080;
+  margin-bottom: 20px;
+}
+
+.results {
+  width: 40%;
+}
+
+.search-results {
+  margin-bottom: 23px;
+}
+
+.search-results h2, .search-results p {
+  margin: 0;
+  display: block;
+}
+
+.search-results h2 a{
+  text-decoration: none;
+  color: rgb(26, 13, 171);
+  font-weight: normal;
+  font-size: 18px;
+  
+}
+
+.link {
+  color: #006621;
+  line-height: 16px;
+  text-decoration: none;
+}
+
+.summary {
+  color: #545454;
+  font-size: 13px;
+}
+
+.related-searches {
+  border-top: 1px solid rgb(235, 235, 235);
+  border-bottom: 1px solid rgb(235, 235, 235);
+  height: 155px;
+}
+
+.related-searches h3 {
+  color: rgb(128, 128, 128);
+  font-size: 18px;
+  padding-bottom: 0px;
+  font-weight: normal;
+  padding-bottom: 7px;
+  margin-bottom: 0px;
+}
+
+.related-searches td {
+  width: 240px;
+  height: 20px;
+  font-size: 13px;
+}
+
+.related-searches td a {
+  text-decoration: none;
+  color: rgb(26, 13, 171);
+}
