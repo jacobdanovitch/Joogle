@@ -49,10 +49,15 @@ class VSM(BaseRM):
     
     def rank(self, q):
         q = self.preprocess_query(q, struct=set)
-        return self.d_w.loc[:, set(q)].T.apply(sum).sort_values(ascending=False)
+        try:
+            return self.d_w.loc[:, set(q)].T.apply(sum).sort_values(ascending=False)
+        except:
+            return None
 
     def query(self, q, top_n=10, confidence_method=Stats.sigmoid):
         res = self.rank(q)
+        if not res:
+            return None
         out = self.data.loc[res.head(10).index]
         
         if confidence_method:

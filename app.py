@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+import pandas as pd
 import os
 
 
@@ -29,14 +30,17 @@ def search_vsm():
   
   query = request.args.get('q', type = str) or request.form.get('q')
   if not query:
-    print(f"Empty query. Request data: {list(request.args.items())}")
-    return redirect(url_for("index"))
+    return f"Empty query. Request data: {list(request.args.items())}"
   
   correction = vsm_model.check_spelling(query)
   
-  (_, title), (_, body), (_, confidence) = vsm_model.query(query).to_dict().items()
-  results = dict(zip(title.values(), body.items()))
+  df = vsm_model.query(query)
+  if not df:
+    df = pd.DataFrame(columns=["title", "body", "confidence"])
 
+  (_, title), (_, body), (_, confidence) = df.to_dict().items()
+
+  results = dict(zip(title.values(), body.items()))
   return render_template("results.html", query=query, correction=correction, results=results)
   
 
@@ -45,7 +49,7 @@ def search_brm():
   query = request.args.get('q', type = str)
   
   try:
-    (_, title), (_, body) = brm_model.query(query).to_dict().items() # why is there confidence here??
+    (_, title), (_, body) = brm_model.query(query).to_dict().items()
   except:
     return "Unable to parse boolean expression."
   
