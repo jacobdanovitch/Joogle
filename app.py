@@ -35,7 +35,7 @@ def search_vsm():
   correction = vsm_model.check_spelling(query)
   
   df = vsm_model.query(query)
-  if not df:
+  if df is None:
     df = pd.DataFrame(columns=["title", "body", "confidence"])
 
   (_, title), (_, body), (_, confidence) = df.to_dict().items()
@@ -47,16 +47,20 @@ def search_vsm():
 @app.route("/search/brm")
 def search_brm():
   query = request.args.get('q', type = str)
+  correction = None
+  err_msg = None
   
   try:
+    correction = brm_model.check_spelling(query)
     (_, title), (_, body) = brm_model.query(query).to_dict().items()
   except:
-    return "Unable to parse boolean expression."
-  
-  correction = brm_model.check_spelling(query)
-  results = dict(zip(title.values(), body.items()))
+    df = pd.DataFrame(columns=["title", "body"])
+    (_, title), (_, body) = df.to_dict().items()
+    print("err")
+    err_msg = "Unable to parse boolean query. Please try again."
 
-  return render_template("results.html", query=query, correction=correction, results=results)
+  results = dict(zip(title.values(), body.items()))
+  return render_template("results.html", query=query, correction=correction, results=results, error_msg=err_msg)
  
 if __name__ == "__main__":
   app.run(port=4999)#debug=True)

@@ -61,8 +61,12 @@
   {% endfor %}
   {% else %}
   <h3 style="margin-top: 3%;">There's nothing here!</h3>
-  <p>Click the logo in the top-left to go home and try again.</p>
-  <p>Or, click <a href="/about">here</a> for instructions.</p>
+  <h5>Click the logo in the top-left to go home and try again. Or, click <a href="/about">here</a> for instructions.</h5>
+
+    {% if error_msg %}
+    <p style='margin-top: 3%;'>Error: <span style='color: darkred;'>{{ error_msg }}</span></p>
+    <script>alert('{{ error_msg }}')</script>
+    {% endif %}
   {% endif %}
 </div>
 {% endblock %}
