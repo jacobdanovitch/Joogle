@@ -1,3 +1,5 @@
+from nltk.corpus import stopwords
+
 def char_ngram(w, n=2):
     return [w[i:i+n] for i in range(len(w)-n+1)]
 
@@ -8,8 +10,8 @@ def match(m, vocab):
     m = char_ngram(m)
     return {w: ratio(chars, m) for (w, chars) in vocab.items()}
         
-def spell_check(m, vocab, threshold=0.75):
-    if m in vocab:
+def spell_check(m, vocab, threshold=0.75, min_word_len=4):
+    if m in vocab or len(m) < min_word_len or word in stopwords.words():
         return [(m, 1)]
     
     matches = match(m, vocab)    

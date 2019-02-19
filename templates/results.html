@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}{{ query }}{% endblock %}
+{% block title %}{{ query }} - {% endblock %}
 {% block head %}
   {{ super() }}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css')}}" />
