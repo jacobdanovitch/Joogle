@@ -40,7 +40,10 @@ def search_vsm():
   
   query = request.args.get('q', type = str) or request.form.get('q')
   if not query:
-    return f"Empty query. Request data: {list(request.args.items())}"
+    df = pd.DataFrame(columns=["title", "body", "confidence"])
+    (_, title), (_, body), (_, confidence) = df.to_dict().items()
+    results = dict(zip(title.values(), body.items()))
+    return render_template("results.html", query="", correction=None, results=results, error_msg="Empty query.")
   
   correction = vsm_model.check_spelling(query)
   
