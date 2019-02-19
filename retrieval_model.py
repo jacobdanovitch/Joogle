@@ -9,7 +9,7 @@ from build_dictionary import clean, remove_punc
 
 class BaseRM:
     def __init__(self, data_path="data/catalogue-uottawa-ca.json", posting_path="model/uottawa.postings.json"):
-        self.data = pd.read_json(data_path).set_index("id")[["title", "body"]]
+        self.data = pd.read_json(data_path)[["id", "title", "body"]]
         corpus, self.phrases = index_phrases(self.data.body.tolist())
         self.data["cleaned"] = corpus
 
@@ -28,8 +28,7 @@ class BaseRM:
     
     
     def build_vocab(self):
-        vocab = list(self.term_dict.keys())
-        vocab = {w: char_ngram(w) for w in vocab}
+        vocab = {w: char_ngram(w) for w in self.term_dict.keys()}
         return vocab
     
     def check_spelling(self, query):        

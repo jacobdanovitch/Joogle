@@ -52,7 +52,7 @@
   {% for title, (rank, body) in results.items() %}
   <div class="result">
     <h4>
-      {{ title }}
+        <a href="https://catalogue.uottawa.ca/search/?P={{ title }}">{{ title }}</a>
     </h4>
     <p>
       {{ body }}

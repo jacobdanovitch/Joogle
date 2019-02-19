@@ -54,11 +54,13 @@ class VSM(BaseRM):
         except:
             return None
 
-    def query(self, q, top_n=10, confidence_method=Stats.sigmoid):
+    def query(self, q, top_n=None, confidence_method=Stats.sigmoid):
         res = self.rank(q)
         if res is None:
             return None
-        out = self.data.loc[res.head(10).index]
+        if top_n:
+            res = res.head(top_n)
+        out = self.data.reset_index().loc[res.index]
         
         if confidence_method:
             res = confidence_method(res)
