@@ -23,6 +23,16 @@ def api(query, model):
   return m.query(query)
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'),
+
+
+@app.route("/about")
+def about():
+  return render_template("about.html")
+
+
 @app.route("/search/vsm", methods=["GET"])
 def search_vsm():
   if request.method != "GET":
@@ -63,4 +73,4 @@ def search_brm():
   return render_template("results.html", query=query, correction=correction, results=results, error_msg=err_msg)
  
 if __name__ == "__main__":
-  app.run(port=4999)#debug=True)
+  app.run(port=4999, debug=True)
