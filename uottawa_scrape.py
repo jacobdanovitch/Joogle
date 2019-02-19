@@ -10,16 +10,11 @@ f = open("courses.txt", "w")
 
 
 def parse(c):
-    info = list(filter(bool, c))
-    assert len(info) == 2, "Invalid."
-
-    h, d = map(lambda x: x.text, info)
+    h, d = c
     h = h.replace(u'\xa0', ' ')
     d = d.replace("\n", '')
 
     if not bool(re.match(_EN_COURSE_PATTERN, h)):
-        # f.write(h+"\n")
-        # print(h)
         return None
 
     global _DOC_ID
@@ -30,31 +25,50 @@ def parse(c):
 def make_soup(html):
         return soup.BeautifulSoup(html, "lxml").find("body")
 
-def scrape(url="https://catalogue.uottawa.ca/en/courses/csi/", html=None):
-    if url and not html:
+def scrape(url="https://catalogue.uottawa.ca/en/courses/csi/", html=None, to_file=True):
+    if html is None:
         r = requests.get(url)
-        with open("data/uottawa.html", "w") as f:
-                f.write(r.text)
+        html = r.text
+        
+        if to_file:
+            with open("data/uottawa.html", "w") as f:
+                    f.write(r.text)
+    
+    if not html:
+            return None
+        
+    return make_soup(html)
+        
+def to_json(html, filename="data/catalogue-uottawa-ca.json"):
+    courses = []
+    for c in html.find_all("div", {"class":"courseblock"}):
+        title_find = c.find("p", {"class": "courseblocktitle noindent"})
+        title_txt = (title_find and title_find.text) or ""
 
-        html = make_soup(r.text)
+        desc_find = c.find("p", {"class": "courseblockdesc noindent"})
+        desc_txt = (desc_find and desc_find.text) or ""
 
-    else:
-        html = make_soup(html)
+        out = parse((title_txt, desc_txt))
+        if out:
+            courses.append(out)
+    
+    js_file = json.dumps(courses, indent=2)
+    
+    if filename:
+        with open(filename, "w") as f:
+            f.write(js_file)
+        
+    return courses
 
-    titles = html.findAll("p", {"class": "courseblocktitle noindent"})
-    descs = html.findAll("p", {"class": "courseblockdesc noindent"})
 
-    courses = list(zip(titles, descs))
-
-    with open("data/catalogue-uottawa-ca.json", "w") as f:
-        formatted = map(parse, courses)
-        filtered = list(filter(bool, formatted))
-        f.write(json.dumps(filtered, indent=2))
-
-
-with open("data/uottawa.html") as f:
+def run():
+    with open("data/uottawa.html") as f:
         html = f.read()
-
-my_soup = make_soup(html)
-
-scrape(html=html)
+    
+    my_soup = scrape(html=html)
+    to_json(my_soup)
+    
+    
+if __name__ == "__main__":
+    run()
+    

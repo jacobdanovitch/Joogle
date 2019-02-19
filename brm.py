@@ -25,13 +25,16 @@ class BRM(BaseRM):
         return q
 
     
-    def query(self, q):
+    def query(self, q, top_n=None):
         q = self.preprocess_query(q)
         def curried_match(d):
             return self.match(q, d)
 
         mask = self.data.cleaned.apply(curried_match)
-        return self.data[mask][["title", "body"]]
+        out = self.data[mask][["title", "body"]]
+        if top_n:
+            return out[:top_n]
+        return out
 
     def match(self, expr, d): # https://booleanpy.readthedocs.io/en/latest/users_guide.html
         return bool(expr.subs({s: (s.TRUE if s.obj in d else s.FALSE) for s in expr.get_symbols()}, simplify=True))

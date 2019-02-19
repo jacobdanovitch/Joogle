@@ -41,14 +41,16 @@ def join_phrases(t, phrases):
         t = re.sub(reg, rep, t)
     return t
 
-
-def index_phrases(corpus, threshold=0.8):
+def identify_candidates(corpus):
     candidates = flatten([re.findall(r"\b[a-zA-Z]{3,}\b-+\w*", remove_punc(t.lower())) for t in corpus])
     candidates = [tuple(p.split("-")) for p in candidates]
-    
+    return candidates
+
+def index_phrases(corpus, threshold=0.8):
+    candidates = identify_candidates(corpus)
     corpus = [remove_punc(t.lower(), rm_hyphens=True) for t in corpus]
     
-    text = " ".join(corpus).strip()
+    # text = " ".join(corpus).strip()
     
     bigrams = make_bigrams(corpus)
     phrases = find_phrases(candidates, bigrams, threshold)
