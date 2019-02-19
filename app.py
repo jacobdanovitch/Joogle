@@ -74,6 +74,10 @@ def search_brm():
 
   results = dict(zip(title.values(), body.items()))
   return render_template("results.html", query=query, correction=correction, results=results, error_msg=err_msg)
+
+@app.context_processor
+def inject_enumerate():
+    return dict(enumerate=enumerate)
  
 if __name__ == "__main__":
   app.run(port=4999, debug=True)

@@ -12,6 +12,8 @@ var gsearch = function(model) {
     }
   };
 
+var NUM_VISIBLE = 5;
+
 $(document).ready(function() {
   $("#search-form").attr("action", window.location.pathname);
   
@@ -19,4 +21,20 @@ $(document).ready(function() {
   $(`#${active}`).attr("id", "active");
   $("#vsm").click(gsearch('vsm'));
   $("#brm").click(gsearch('brm'));
+
+  var showHiddens = function(){
+    NUM_VISIBLE += 5;
+    console.log(`HERE: ${NUM_VISIBLE}`);
+    $(".result").each(function(index, el){
+      if(index <= NUM_VISIBLE) $(el).removeClass("hidden").show()
+    })
+  }
+
+  showHiddens()
+
+  $(window).scroll(function () { 
+     if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
+        showHiddens()
+     }
+  });
 });
