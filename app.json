@@ -1,0 +1,7 @@
+{
+  "name": "Joogle",
+  "description": "A search engine made for CSI 4107. Currently supports searching the uOttawa CSI course catalogue.",
+  "repository": "https://github.com/jacobdanovitch/Joogle",
+  "logo": "http://joogle-csi4107.herokuapp.com/static/img/googlelogo.png",
+  "keywords": ["information", "retrieval", "search", "engine", "nlp", "natural language processing"]
+}

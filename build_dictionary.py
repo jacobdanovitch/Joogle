@@ -6,6 +6,8 @@ import string
 import re
 import json
 
+# stopwords = open("data/stopwords.english").readlines()
+
 
 def punctuation_regex(rm_hyphens):
     punc = string.punctuation
@@ -29,10 +31,8 @@ def clean(txt, struct=set, rm_stopwords=True):
     txt = remove_punc(txt.lower(), rm_hyphens=True)
     tokens = tokenize(txt)
     if rm_stopwords:
-        tokens = set(tokens).difference(stopwords.words())
+        tokens = set(tokens).difference(stopwords.words())#stopwords)
     
     return struct(lemmatize(tokens))
-
-
 
 

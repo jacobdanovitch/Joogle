@@ -1,0 +1,8 @@
+requests==2.21.0
+boolean.py
+beautifulsoup4==4.7.1
+Flask==1.0.2
+nltk==3.4
+numpy==1.16.1
+pandas==0.24.1
+gunicorn
