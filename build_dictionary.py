@@ -9,16 +9,18 @@ import json
 # stopwords = open("data/stopwords.english").readlines()
 
 
-def punctuation_regex(rm_hyphens):
+def punctuation_regex(rm_hyphens, rm_asterisk):
     punc = string.punctuation
     if not rm_hyphens:
         punc = punc.replace('-', '')
+    if not rm_asterisk:
+        punc = punc.replace('*', '')
     
     punc_reg = r"\b(\w*\d\w*)\b|"+f"[{punc}]" # rm punctuation, words w/ nums
     return re.compile(punc_reg)
 
-def remove_punc(txt, rep_with=' ', rm_hyphens=False):
-    return re.sub(punctuation_regex(rm_hyphens), rep_with, txt)
+def remove_punc(txt, rep_with=' ', rm_hyphens=False, rm_asterisk=False):
+    return re.sub(punctuation_regex(rm_hyphens, rm_asterisk), rep_with, txt)
 
 def tokenize(txt, pattern=r"\b[a-zA-Z]{3,}\b-*\w*"): # only words >= 3 char
     return regexp_tokenize(txt, pattern)
