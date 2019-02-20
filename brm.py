@@ -1,5 +1,5 @@
 from retrieval_model import *
-from build_dictionary import remove_punc
+from build_dictionary import remove_punc, tokenize
 
 import boolean
 
@@ -16,9 +16,21 @@ class BRM(BaseRM):
     def preprocess_query(self, q, rm_stopwords=False):
         q = super(BRM, self).preprocess_query(q)
         q = join_phrases(q, self.phrases)
-        q = remove_punc(q, rep_with='', rm_hyphens=True)
+        q = remove_punc(q, rep_with='', rm_hyphens=True, rm_asterisk=False)
+        
+        wildcards = re.findall(r"\w+\*[^\w]*", q)
+        print(f"wildcards: {wildcards}")
+        for wc in wildcards:
+            wc = wc.replace(" ", "")
+            if not wc.endswith("*"):
+                continue
+            root = wc.replace("*", "")
+            rep = f"({'|'.join((w for w in self.build_vocab() if w.startswith(root)))})"
+            q = q.replace(wc, rep)
 
+        print(q)
         q = self.algebra.parse(q)
+        return q
         for s in q.get_symbols():
             s.obj = s.obj.lower()
             
