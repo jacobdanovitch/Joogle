@@ -3,13 +3,14 @@ from nltk.corpus import stopwords
 def char_ngram(w, n=3):
     return [w[i:i+n] for i in range(len(w)-n+1)]
 
-def j(w1, w2):
-    A = set(char_ngram(w1, n=2))
-    B = set(char_ngram(w2, n=2))
+def j(grams1, grams2):
+    A = set(grams1)
+    B = set(grams2)
     return len(A.intersection(B))/len(A.union(B))
 
 def score(word, vocab):
-    return {w: j(word, w) for w in vocab}
+    gram_in = char_ngram(word)
+    return {w: j(gram_in, gram) for (w, gram) in vocab.items()}
         
 """
 Low threshold because the UI always takes the top candidate as of right now.
