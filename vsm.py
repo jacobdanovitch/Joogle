@@ -50,7 +50,7 @@ class VSM(BaseRM):
     def rank(self, q):
         q = self.preprocess_query(q, struct=set)
         try:
-            return self.d_w.loc[:, set(q)].T.apply(sum).sort_values(ascending=False)
+            return self.d_w.loc[:, set(q)].fillna(0).T.apply(sum).sort_values(ascending=False)
         except:
             return None
 
