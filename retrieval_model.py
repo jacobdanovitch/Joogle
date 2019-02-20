@@ -40,10 +40,9 @@ class BaseRM:
 
         corrections = {}
         for w in q:
-            try:
-                corrections[w] = spell_check(w, vocab)[0][0]
-            except:
-                pass
+            match = spell_check(w, vocab)
+            if match:
+                corrections[w] = match[0][0]
             
         if not corrections:
             return False
