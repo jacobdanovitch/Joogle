@@ -20,6 +20,8 @@ class BaseRM:
                     self.term_dict[t] = {int(k):v for k, v in self.term_dict[t].items()}
         else:
             self.index, self.term_dict = build_postings(corpus)
+
+        self.vocab = self.build_vocab()
             
             
     def preprocess_query(self, q, **kwargs):
@@ -32,18 +34,15 @@ class BaseRM:
         return vocab
     
     def check_spelling(self, query):        
-        vocab = self.build_vocab()
-        
         query = query.lower().strip()
         query = join_phrases(query, self.phrases)
         q = re.findall(r'\w+', remove_punc(query))
 
         corrections = {}
         for w in q:
-            try:
-                corrections[w] = spell_check(w, vocab)[0][0]
-            except:
-                pass
+            match = spell_check(w, self.vocab)
+            if match:
+                corrections[w] = match[0][0]
             
         if not corrections:
             return False
