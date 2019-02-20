@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}{{ query }}{% endblock %}
+{% block title %}{{ query }} - {% endblock %}
 {% block head %}
   {{ super() }}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css')}}" />
@@ -49,11 +49,12 @@
   {% endif %}
   
   {% if results|length > 0 %}
-  {% for title, (rank, body) in results.items() %}
-  <div class="result">
+  {% for i, (title, (id, body)) in enumerate(results.items()) %}
+  <div class="result hidden">
     <h4>
-        <a href="https://catalogue.uottawa.ca/search/?P={{ title }}">{{ title }}</a>
+        <a style='color: #1a0dab' href="https://catalogue.uottawa.ca/search/?P={{ title | replace (" (3 units)", "") | replace(" ", "%20") }}">{{ title }}</a>
     </h4>
+    <span style='color: #006621'>https://catalogue.uottawa.ca/search/?P={{ title | replace (" (3 units)", "") | replace(" ", "%20") }}</span>
     <p>
       {{ body }}
     </p>

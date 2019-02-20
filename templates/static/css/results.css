@@ -6,6 +6,10 @@
   margin-top: 2%;
 }
 
+.hidden {
+  display: none;
+}
+
 .result > h4 {
   text-align: left;
 }

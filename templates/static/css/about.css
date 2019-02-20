@@ -1,0 +1,12 @@
+#about {
+  margin-left: 10%;
+}
+
+#about p {
+  font-size: 14px;
+}
+
+#about code {
+  background-color: #e9e9e9;
+  font-size: 16px;
+}
