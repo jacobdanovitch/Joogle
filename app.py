@@ -66,7 +66,8 @@ def search_brm():
   try:
     correction = brm_model.check_spelling(query)
     (_, title), (_, body) = brm_model.query(query).to_dict().items()
-  except:
+  except Exception as e:
+    print(e.with_traceback(e.__traceback__))
     df = pd.DataFrame(columns=["title", "body"])
     (_, title), (_, body) = df.to_dict().items()
     print("err")

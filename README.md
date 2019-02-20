@@ -2,6 +2,8 @@
 
 # Joogle
 
+#### By: Jacob Danovitch
+
 A search engine made for CSI 4107. Currently supports searching the uOttawa CSI course catalogue.
 
 
@@ -29,3 +31,14 @@ $ python app.py
 ```
 
 Then, navigate to http://localhost:4999/ to access the app (or http://127.0.0.1:4999 if this fails).
+
+### Usage
+
+#### Vector Space Model (VSM) Search 
+
+With this, you can perform free-text searches like *data science* or *web development*.
+
+#### Boolean Retrieval Model (BRM) Search 
+
+With this, you can perform boolean searches like *operating AND systems* or *NOT hardware*.
+

@@ -4,6 +4,7 @@
 {% block head %}
   {{ super() }}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css')}}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css')}}" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/codepen_clone.css')}}" />
 
   <script src="{{ url_for('static', filename='js/data.js')}}"></script>
@@ -37,12 +38,38 @@
   </div>
 </header>
 
-<div id="results">  
+<div id="about">  
+<!--
   <h2 style="margin-top: 3%;">About <a href="https://github.com/jacobdanovitch/Joogle">Joogle</a></h2>
-  <h5>A search engine made for CSI 4107. Currently supports searching the uOttawa CSI course catalogue.</h5>
+  <p>A search engine made for CSI 4107. Currently supports searching the uOttawa CSI course catalogue.</p>
   <h6>By: Jacob Danovitch</h6>
   <br/>
   <strong>Coming soon (as I wake up)</strong>
   <p>tldr: VSM = vector space search (free text like "data science", "web development"); BRM = boolean search ("operating AND systems", "NOT hardware")</p>
+-->
+<h1 style="margin-top: 3%;">About <a href="https://github.com/jacobdanovitch/Joogle">Joogle</a></h1>
+<h5>By: Jacob Danovitch</h5>
+<p>A search engine made for CSI 4107. Currently supports searching the uOttawa CSI course catalogue.</p>
+
+<h2>Usage</h4>
+<hr/>
+<h6><strong>Vector Space Model (VSM) Search</strong></h6>
+<p>With this, you can perform free-text searches like <em>data science</em> or <em>web development</em>.</p>
+<h6><strong>Boolean Retrieval Model (BRM) Search</strong></h6>
+<p>With this, you can perform boolean searches like <em>operating AND systems</em> or <em>NOT hardware</em>.</p>
+
+<h2>Project Info</h2>
+<hr/>
+<h4>GitHub Repository</h4>
+<p>The code for the project can be found at its <a href="https://github.com/jacobdanovitch/Joogle">repository</a> on Github.</p>
+<h4>Local Installation</h4>
+<p>First, in your shell, run:</p>
+<pre><code class='language-shell' lang='shell'>$ ./install.sh # or install.bat on windows
+</code></pre>
+<p>This will install several Python packages, as well as download stopwords and a lemmatizer from <code>nltk</code>. </p>
+<p>Then, to run the app, run:</p>
+<pre><code class='language-shell' lang='shell'>$ python app.py
+</code></pre>
+<p>Then, navigate to <a href='http://localhost:4999/' target='_blank' class='url'>http://localhost:4999/</a> to access the app (or <a href='http://127.0.0.1:4999' target='_blank' class='url'>http://127.0.0.1:4999</a> if this fails).</p>
 </div>
 {% endblock %}

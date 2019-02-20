@@ -11,7 +11,7 @@ def match(m, vocab):
     return {w: ratio(chars, m) for (w, chars) in vocab.items()}
         
 def spell_check(m, vocab, threshold=0.75, min_word_len=4):
-    if m in vocab or len(m) < min_word_len or word in stopwords.words():
+    if m in vocab or len(m) < min_word_len or m in stopwords.words():
         return [(m, 1)]
     
     matches = match(m, vocab)    
