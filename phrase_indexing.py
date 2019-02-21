@@ -1,9 +1,11 @@
 import re
 from build_dictionary import remove_punc
 
+# https://stackoverflow.com/questions/952914/how-to-make-a-flat-list-out-of-list-of-lists
 def flatten(l):
     return [item for sublist in l for item in sublist]
 
+# https://stackoverflow.com/questions/21844546/forming-bigrams-of-words-in-list-of-sentences-with-python
 def make_bigrams(text):
     return [b for l in text for b in zip(re.split(r'\s+', l)[:-1], re.split(r'\s+', l)[1:])]
     
