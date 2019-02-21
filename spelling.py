@@ -1,5 +1,6 @@
 from nltk.corpus import stopwords
 
+# https://stackoverflow.com/questions/18658106/quick-implementation-of-character-n-grams-using-python
 def char_ngram(w, n=3):
     return [w[i:i+n] for i in range(len(w)-n+1)]
 
@@ -24,4 +25,4 @@ def spell_check(m, vocab, min_word_len=4, threshold=0.25):
         return [(m[:-1], 1)]
     
     matches = [(w, scr) for (w, scr) in score(m, vocab).items() if scr > threshold]
-    return list(reversed(sorted(matches, key=lambda x: x[1])))
+    return sorted(matches, key=lambda x: x[1], reverse=True)

@@ -76,6 +76,14 @@ def search_brm():
   results = dict(zip(title.values(), body.items()))
   return render_template("results.html", query=query, correction=correction, results=results, error_msg=err_msg)
 
+
+"""
+A way to inject typical python functions into Jinja templates.
+
+This is never used, but might be useful later.
+I also kind of just like it, so why not.
+https://stackoverflow.com/questions/27035728/flask-cannot-import-enumerate-undefinederror-enumerate-is-undefined
+"""
 @app.context_processor
 def inject_enumerate():
     return dict(enumerate=enumerate)

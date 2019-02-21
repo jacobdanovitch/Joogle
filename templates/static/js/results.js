@@ -32,6 +32,8 @@ $(document).ready(function() {
 
   showHiddens()
 
+  // infinite scrolling similar to this: https://stackoverflow.com/questions/36806449/infinity-scroll-load-all-data-from-database-and-scroll-to-show-more
+
   $(window).scroll(function () { 
      if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
         showHiddens()
