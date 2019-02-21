@@ -1,3 +1,5 @@
+chardet
+urllib3
 requests==2.21.0
 boolean.py
 beautifulsoup4==4.7.1

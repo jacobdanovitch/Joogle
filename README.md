@@ -7,7 +7,6 @@
 A search engine made for CSI 4107. Currently supports searching the uOttawa CSI course catalogue.
 
 
-
 ## Instructions
 
 ### Live Site
