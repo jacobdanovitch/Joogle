@@ -45,20 +45,20 @@ class NGramLanguageModeler(nn.Module):
             train_data = random.sample(self.vocab.ngrams, BATCH_SIZE) if BATCH_SIZE else self.vocab.ngrams
             
             i = 0
-            for context, target in tqdm(train_data):
-                context_idxs = torch.tensor([self.vocab.word2index[w] for w in context], dtype=torch.long)
+            for c1, c2, target in tqdm(train_data):
+                context_idxs = torch.tensor([self.vocab.w2i[c1], self.vocab.w2i[c2]], dtype=torch.long)
                 
                 self.zero_grad()
                 
                 log_probs = self(context_idxs)
-                loss = loss_function(log_probs, torch.tensor([self.vocab.word2index[target]], dtype=torch.long))
+                loss = loss_function(log_probs, torch.tensor([self.vocab.w2i[target]], dtype=torch.long))
                 loss.backward()
                 optimizer.step()
 
                 total_loss += loss.item()
                 i+= 1
                 
-            model_name = f"YT_NN_EP{epoch}_TEP{EPOCHS}_BS{len(train_data)}.torch"          
+            model_name = f"EP{epoch}_TEP{EPOCHS}_BS{len(train_data)}.torch"          
             losses.append(total_loss/len(train_data))
             logger.info(f"Epoch {epoch}/{EPOCHS}: {losses[-1]}")
             
@@ -66,5 +66,5 @@ class NGramLanguageModeler(nn.Module):
         return losses
     
     def save_progress(self, model_name):
-        logger.info("Saving model checkpoint to file: {}".format(model_name))
+        logger.info(f"Saving model checkpoint to file: {model_name}")
         torch.save(self, model_name)
