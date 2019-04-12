@@ -3,8 +3,7 @@ import pandas as pd
 import os
 
 
-from vsm import VSM
-from brm import BRM
+from joogle.models import VSM, BRM
 
 
 app = Flask(__name__, static_folder=os.path.abspath('templates/static'))

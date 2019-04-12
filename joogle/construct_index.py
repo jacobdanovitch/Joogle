@@ -5,7 +5,7 @@ from collections import Counter
 import numpy as np
 import pandas as pd
 
-from build_dictionary import clean
+from .build_dictionary import clean
 
 
 def build_postings(txt, dataset="uottawa", to_file=True):

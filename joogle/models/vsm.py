@@ -1,5 +1,5 @@
-from retrieval_model import *
-from construct_index import sparse_term_matrix
+from .retrieval_model import *
+from ..construct_index import sparse_term_matrix
 
 from math import log10
 import json
@@ -39,11 +39,11 @@ Vector Space Model
 """
 class VSM(BaseRM):
     def __init__(self, data_path="data/catalogue-uottawa-ca.json", posting_path="model/uottawa.postings.json"):
-        super(VSM, self).__init__(data_path, posting_path)
+        super().__init__(data_path, posting_path)
         self.d_w = self.weight_matrix()
 
     def preprocess_query(self, q, struct=list, rm_stopwords=True):
-        q = super(VSM, self).preprocess_query(q)
+        q = super().preprocess_query(q)
         q = clean(q, struct=struct, rm_stopwords=rm_stopwords)
         return q
     

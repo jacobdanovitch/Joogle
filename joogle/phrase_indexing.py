@@ -1,5 +1,5 @@
 import re
-from build_dictionary import remove_punc
+from .build_dictionary import remove_punc, clean
 
 # https://stackoverflow.com/questions/952914/how-to-make-a-flat-list-out-of-list-of-lists
 def flatten(l):
@@ -54,7 +54,7 @@ def index_phrases(corpus, threshold=0.8):
     
     # text = " ".join(corpus).strip()
     
-    bigrams = make_bigrams(corpus)
+    bigrams = make_bigrams(corpus) # make_bigrams(map(lambda x: ' '.join(clean(x)), corpus))
     phrases = find_phrases(candidates, bigrams, threshold)
     
     replace_fn = lambda t: join_phrases(t, phrases.keys())

@@ -2,15 +2,16 @@ import re
 import json
 import pandas as pd
 
-from construct_index import build_postings
-from phrase_indexing import index_phrases, join_phrases
-from spelling import spell_check, char_ngram
-from build_dictionary import clean, remove_punc
+# from ..construct_index import build_postings
+# from phrase_indexing import index_phrases, join_phrases
+# from spelling import spell_check, char_ngram
+# from build_dictionary import clean, remove_punc
+from .. import build_postings, index_phrases, join_phrases, spell_check, char_ngram, clean, remove_punc
 
 class BaseRM:
     def __init__(self, data_path="data/catalogue-uottawa-ca.json", posting_path="model/uottawa.postings.json"):
         self.data = pd.read_json(data_path)[["id", "title", "body"]]
-        corpus, self.phrases = index_phrases(self.data.body.tolist())
+        corpus, self.phrases = index_phrases(list(map(' '.join, self.data.body.apply(lambda x: clean(x, struct=list, rm_stopwords=False)).tolist())))
         self.data["cleaned"] = corpus
 
         if posting_path:

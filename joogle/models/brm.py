@@ -1,7 +1,8 @@
-from retrieval_model import *
-from build_dictionary import remove_punc, tokenize
+from .retrieval_model import BaseRM
+from .. import remove_punc, tokenize, join_phrases, spell_check
 
 import boolean
+import re
 
 
 """
@@ -19,7 +20,6 @@ class BRM(BaseRM):
         q = remove_punc(q, rep_with='', rm_hyphens=True, rm_asterisk=False)
         
         wildcards = re.findall(r"\w+\*[^\w]*", q)
-        print(f"wildcards: {wildcards}")
         for wc in wildcards:
             wc = wc.replace(" ", "")
             if not wc.endswith("*"):
@@ -28,13 +28,14 @@ class BRM(BaseRM):
             rep = f"({'|'.join((w for w in self.build_vocab() if w.startswith(root)))})"
             q = q.replace(wc, rep)
 
-        print(q)
         q = self.algebra.parse(q)
         return q
+        """
         for s in q.get_symbols():
             s.obj = s.obj.lower()
             
         return q
+        """
 
     
     def query(self, q, top_n=None):
